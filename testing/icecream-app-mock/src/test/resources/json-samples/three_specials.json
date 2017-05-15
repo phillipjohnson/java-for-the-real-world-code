@@ -1,0 +1,16 @@
+{
+  "specials":[
+    {
+      "flavor":"Salty Caramel",
+      "price":3.25
+    },
+    {
+      "flavor":"Coconut Chip",
+      "price":3.25
+    },
+    {
+      "flavor":"Maui Mango",
+      "price":3.75
+    }
+  ]
+}
