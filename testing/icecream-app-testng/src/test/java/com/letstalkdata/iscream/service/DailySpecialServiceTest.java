@@ -38,7 +38,7 @@ public class DailySpecialServiceTest {
         String json = readJsonFromFile(fileName + ".json");
         DailySpecialService service = new DailySpecialService();
         List<String> parsedFlavors = service.parseFlavorsFromJson(json);
-        assertEquals(expected, parsedFlavors.size());
+        assertEquals(parsedFlavors.size(), expected);
     }
 
     @Test
@@ -46,6 +46,6 @@ public class DailySpecialServiceTest {
         String json = readJsonFromFile("one_special.json");
         DailySpecialService service = new DailySpecialService();
         List<String> parsedFlavors = service.parseFlavorsFromJson(json);
-        assertEquals("Salty Caramel", parsedFlavors.get(0));
+        assertEquals(parsedFlavors.get(0), "Salty Caramel");
     }
 }
