@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+  <h:head>
+    <title>New Order</title>
+    <h:outputStylesheet name="bootstrap.min.css" />
+  </h:head>
+  <h:body>
+    <h2>New Order</h2>
+    <h:panelGroup layout="block">
+      <h:form style="width: 500px;" method="POST">
+        <h:panelGroup layout="block" class="form-group">
+          <h:outputLabel for="flavor">Flavor</h:outputLabel>
+          <h:selectOneMenu id="flavor" class="form-control" h:value="#{order.flavor}">
+            <f:selectItems value="#{ingredientsService.flavors}" var="flavor"
+                             itemLabel="#{flavor}" itemValue="#{flavor}" />
+          </h:selectOneMenu>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+          <h:outputLabel for="scoops">Scoops</h:outputLabel>
+          <h:inputText id="scoops" class="form-control" h:value="#{order.scoops}"/>
+        </h:panelGroup>
+        <h:panelGroup layout="block" class="form-group">
+          <h:outputLabel for="toppings">Toppings</h:outputLabel>
+          <h:selectManyCheckbox id="toppings" value="#{order.toppings}">
+            <f:selectItems value="#{ingredientsService.toppings}" var="topping"
+                             itemLabel="#{topping}" itemValue="#{topping}" />
+          </h:selectManyCheckbox>
+        </h:panelGroup>
+        <h:commandButton class="btn btn-primary" value="Create Order"
+                         action="#{order.save}">
+          <f:ajax execute="@form" render="orderDisplay"/>
+        </h:commandButton>
+        <br/>
+        <h:panelGroup id="orderDisplay" layout="block">
+          <h:panelGroup rendered="#{order.saved}">
+            <h:outputText value="Order Saved!"/>
+            <br/>
+            <h:outputText value="Flavor: #{order.flavor}"/>
+            <br/>
+            <h:outputText value="Scoops: #{order.scoops}"/>
+            <br/>
+            <h:outputText value="Toppings: #{order.toppings}"/>
+            <br/>
+            <h:outputText id="priceDisplay"
+                          value="The total is: #{order.formattedPrice}"/>
+          </h:panelGroup>
+        </h:panelGroup>
+      </h:form>
+    </h:panelGroup>
+  </h:body>
+</html>

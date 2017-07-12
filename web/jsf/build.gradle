@@ -1,0 +1,32 @@
+buildscript {
+    ext {
+        jsfVersion = '2.2.14'
+    }
+}
+
+group 'iscream-web'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.sun.faces', name: 'jsf-api', version:"$jsfVersion"
+    compile group: 'com.sun.faces', name: 'jsf-impl', version:"$jsfVersion"
+    compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+}
+
+war {
+    archiveName = "${rootProject.name}.war"
+}
+
+gretty {
+    contextPath = '/'
+}
