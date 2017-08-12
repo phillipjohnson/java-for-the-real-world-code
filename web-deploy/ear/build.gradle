@@ -1,0 +1,12 @@
+allprojects {
+   group = 'com.letstalkdata.iscream'
+}
+
+version = '0.1-SNAPSHOT'
+
+apply plugin: 'ear'
+
+dependencies {
+    deploy project(':iscream-ejb')
+    deploy project(path: ':iscream-web', configuration: 'archives')
+}

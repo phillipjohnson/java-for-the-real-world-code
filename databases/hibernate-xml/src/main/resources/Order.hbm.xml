@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.letstalkdata.iscream.domain.Order" table="purchase">
+        <id name="id" type="int" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="created" column="create_dttm" type="timestamp"/>
+        <property name="totalPrice" column="total_price" type="big_decimal"/>
+        <bag name="orderLineItems"
+             table="purchase_line_item"
+             cascade="all"
+             inverse="true">
+            <key column="purchase_id" not-null="true" />
+            <one-to-many class="com.letstalkdata.iscream.domain.OrderLineItem"/>
+        </bag>
+    </class>
+</hibernate-mapping>

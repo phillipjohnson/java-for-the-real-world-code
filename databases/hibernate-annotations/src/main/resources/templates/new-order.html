@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
+  <title>New Order</title>
+</head>
+<body>
+  <h2>New Order</h2>
+  <div style="margin: 40px;">
+    <form style="width: 500px;" method="POST" th:action="@{/orders/new}">
+      <div class="form-group">
+        <label for="flavor">Flavor</label>
+        <select class="form-control" id="flavor" name="flavor">
+          <option value="" selected="selected"></option>
+          <option th:each="flavor : ${flavors}" th:value="${flavor.getId()}" th:text="${flavor.getName()}"></option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="scoops">Scoops</label>
+        <input class="form-control" type="text" id="scoops" name="scoops"/>
+      </div>
+      <div class="form-group">
+        <label for="toppingsContainer">Toppings</label>
+        <div id="toppingsContainer">
+          <div th:each="topping,iter : ${toppings}" class="checkbox">
+            <input type="checkbox" name="toppings" th:id="'topping-' + ${iter.index}" th:value="${topping.getId()}" />
+            <label th:for="'topping-' + ${iter.index}" th:text="${topping.getName()}" ></label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Create Order</button>
+    </form>
+  </div>
+</body>
+</html>

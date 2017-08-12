@@ -1,0 +1,4 @@
+rootProject.name = 'iscream-ear'
+
+include 'iscream-ejb'
+include 'iscream-web'

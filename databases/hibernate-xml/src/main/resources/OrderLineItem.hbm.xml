@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.letstalkdata.iscream.domain.OrderLineItem"
+           table="purchase_line_item">
+        <id name="id" type="int" column="id">
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="order"
+                     class="com.letstalkdata.iscream.domain.Order"
+                     lazy="proxy"
+                     fetch="join">
+            <column name="purchase_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ingredient"
+                     class="com.letstalkdata.iscream.domain.Ingredient"
+                     lazy="proxy"
+                     fetch="join">
+            <column name="ingredient_id" not-null="true" />
+        </many-to-one>
+        <property name="units" column="units" type="int"/>
+    </class>
+</hibernate-mapping>

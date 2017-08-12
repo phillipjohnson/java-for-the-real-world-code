@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.letstalkdata.iscream.service.IngredientService">
+    <select id="getFlavors"
+            resultType="com.letstalkdata.iscream.domain.Flavor">
+        select id, ingredient as name, unit_price as unitPrice
+        from ingredient
+        where ingredient_type = 'ICE_CREAM'
+    </select>
+    <select id="getFlavorById"
+            resultType="com.letstalkdata.iscream.domain.Flavor">
+        select id, ingredient as name, unit_price as unitPrice
+        from ingredient
+        where id = #{id}
+    </select>
+    <select id="getToppings"
+            resultType="com.letstalkdata.iscream.domain.Topping">
+        select id, ingredient as name, unit_price as unitPrice
+        from ingredient
+        where ingredient_type = 'TOPPING'
+    </select>
+    <select id="getToppingById"
+            resultType="com.letstalkdata.iscream.domain.Topping">
+        select id, ingredient as name, unit_price as unitPrice
+        from ingredient
+        where id = #{id}
+    </select>
+</mapper>
