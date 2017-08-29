@@ -1,0 +1,48 @@
+Configuration:
+  status: warn
+  name: IScream
+  properties:
+    property:
+      name: format
+      value: "[%5p] %d %c{1.} [%t] %m%n"
+  thresholdFilter:
+    level: debug
+
+  appenders:
+    Console:
+      name: STDOUT
+      PatternLayout:
+        Pattern: ${format}
+    RollingFile:
+      name: File
+      fileName: iscream.log
+      filePattern: iscream-%d{yyyy-MM-dd}-%i.log
+      defaultRolloverStrategy:
+        max: 10
+      policies:
+        sizeBasedTriggeringPolicy:
+          size: 1 MB
+      PatternLayout:
+        Pattern: ${format}
+
+ 
+  Loggers:
+    Root:
+      level: error
+      AppenderRef:
+        -
+          ref: STDOUT
+          ref: File
+
+    logger:
+      -
+        name: com.letstalkdata
+        level: debug
+        additivity: false
+        AppenderRef:
+          -
+            ref: STDOUT
+            level: debug
+          -
+            ref: File
+            level: warn
