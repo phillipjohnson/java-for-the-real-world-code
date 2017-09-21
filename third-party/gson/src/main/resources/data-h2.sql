@@ -1,0 +1,2 @@
+insert into ingredient_type(ingredient_type) values('ICE_CREAM'), ('TOPPING');
+insert into ingredient(ingredient, ingredient_type, unit_price) values ('Vanilla', 'ICE_CREAM', 1.5), ('Chocolate', 'ICE_CREAM', 1.5), ('Strawberry', 'ICE_CREAM', 1.5), ('Caramel', 'TOPPING', 0.75), ('Cherry', 'TOPPING', 0.25), ('Chocolate', 'TOPPING', 0.50), ('Peanuts', 'TOPPING', 0.25),  ('Sprinkles', 'TOPPING', 0.25);

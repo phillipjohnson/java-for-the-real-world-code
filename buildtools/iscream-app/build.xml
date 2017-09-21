@@ -1,0 +1,32 @@
+<project>
+
+    <path id="classpath">
+        <fileset dir="lib" includes="**/*.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src/main/java"
+               destdir="build/classes"
+               classpathref="classpath"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/IScream.jar" basedir="build/classes"/>
+    </target>
+
+    <target name="run" depends="jar">
+        <java fork="true" classname="com.letstalkdata.iscream.Application">
+            <classpath>
+                <path refid="classpath"/>
+                <path location="build/jar/IScream.jar"/>
+            </classpath>
+        </java>
+    </target>
+
+</project>

@@ -1,6 +1,0 @@
-<ivy-module version="2.0">
-    <info organisation="com.example" module="iscream"/>
-    <dependencies>
-        <dependency org="com.google.guava" name="guava" rev="21.0"/>
-    </dependencies>
-</ivy-module>
