@@ -25,7 +25,7 @@ public class DailySpecialServiceTest {
     }
 
     @Test
-    public void GivenZeroSpecials_EmptyListIstReturned() throws Exception {
+    public void GivenZeroSpecials_EmptyListIsReturned() throws Exception {
         String json = readJsonFromFile("no_specials.json");
         DailySpecialService service = new DailySpecialService();
         List<String> parsedFlavors = service.parseFlavorsFromJson(json);

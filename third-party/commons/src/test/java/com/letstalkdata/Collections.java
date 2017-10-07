@@ -28,7 +28,7 @@ public class Collections {
         Set<Integer> b = new HashSet<>(Arrays.asList(1,2,4));
         SetUtils.SetView<Integer> result = SetUtils.difference(a, b);
 
-        assert 1 ==result.size();
+        assert 1 == result.size();
         assert result.contains(3);
     }
 

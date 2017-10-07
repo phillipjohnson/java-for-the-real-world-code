@@ -8,10 +8,7 @@ import com.letstalkdata.iscream.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -66,24 +63,26 @@ public class OrderController {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    @RequestMapping(value = "/fromJson", method = RequestMethod.POST)
+    @RequestMapping(value = "/fromJson", method = RequestMethod.POST,
+            produces = "application/json")
+    @ResponseBody
     public String createOrderFromJson(@RequestBody String orderJson)
             throws Exception {
         Order order = MAPPER.readValue(orderJson, Order.class);
         order.getOrderLineItems().forEach(li -> li.setOrder(order));
         orderService.save(order);
 
-        return "order-success";
+        return MAPPER.writeValueAsString(order);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String all(Model model) throws Exception {
+    @RequestMapping(value = "", method = RequestMethod.GET,
+            produces = "application/json")
+    @ResponseBody
+    public String all() throws Exception {
         List<Order> orders = orderService.getAllOrders();
-        String json = MAPPER
+        return MAPPER
                 .writerWithDefaultPrettyPrinter()
                 .writeValueAsString(orders);
-        model.addAttribute("allOrders", json);
-        return "all-orders";
     }
 
     private static class NewOrderRequest {

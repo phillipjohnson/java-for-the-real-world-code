@@ -11,10 +11,7 @@ import com.letstalkdata.iscream.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -69,20 +66,22 @@ public class OrderController {
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create();
 
-    @RequestMapping(value = "/fromJson", method = RequestMethod.POST)
+    @RequestMapping(value = "/fromJson", method = RequestMethod.POST,
+            produces = "application/json")
+    @ResponseBody
     public String createOrderFromJson(@RequestBody String orderJson) {
         Order order = GSON.fromJson(orderJson, Order.class);
         orderService.save(order);
 
-        return "order-success";
+        return GSON.toJson(order);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String all(Model model) {
+    @RequestMapping(value = "", method = RequestMethod.GET,
+            produces = "application/json")
+    @ResponseBody
+    public String all() {
         List<Order> orders = orderService.getAllOrders();
-        String json = GSON.toJson(orders);
-        model.addAttribute("allOrders", json);
-        return "all-orders";
+        return GSON.toJson(orders);
     }
 
     private static class NewOrderRequest {

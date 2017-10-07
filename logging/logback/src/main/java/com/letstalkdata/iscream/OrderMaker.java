@@ -43,7 +43,7 @@ public class OrderMaker {
     public void makeBadOrder() {
         try {
             Order order = new Order();
-            orderService.save(order);
+            orderService.save(order); // This line intentionally errors
         } catch (PersistenceException e) {
             log.error("Error saving order!", e);
         }

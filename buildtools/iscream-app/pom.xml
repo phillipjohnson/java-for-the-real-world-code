@@ -32,7 +32,9 @@
                   <configuration>
                      <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                           <mainClass>com.letstalkdata.iscream.Application</mainClass>
+                           <mainClass>
+                             com.letstalkdata.iscream.Application
+                           </mainClass>
                         </transformer>
                      </transformers>
                   </configuration>
