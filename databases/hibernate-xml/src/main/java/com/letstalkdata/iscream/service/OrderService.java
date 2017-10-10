@@ -22,7 +22,7 @@ public class OrderService {
             Transaction tx = session.beginTransaction();
             session.persist(order);
             tx.commit();
-        }
+        } // Session is auto-closed
     }
 
 }

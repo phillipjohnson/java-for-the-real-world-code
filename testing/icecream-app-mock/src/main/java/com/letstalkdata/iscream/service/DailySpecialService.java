@@ -53,6 +53,8 @@ public class DailySpecialService {
     }
 
     List<String> parseFlavorsFromJson(String json) {
+        // For demonstration purposes only !
+        // In real code, use a JSON parsing library.
         final String REGEX_PATTERN = "\"flavor\":\"(?<theFlavor>[\\w ]+)\"";
         Pattern flavorRegex = Pattern.compile(REGEX_PATTERN);
         Matcher matcher = flavorRegex.matcher(json);

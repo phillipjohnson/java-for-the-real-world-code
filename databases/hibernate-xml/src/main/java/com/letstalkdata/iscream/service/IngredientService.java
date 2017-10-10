@@ -37,12 +37,12 @@ public class IngredientService {
             @SuppressWarnings("unchecked")
             List<Ingredient> ingredients = (List<Ingredient>) query.list();
             return ingredients;
-        }
+        } // Session is auto-closed
     }
 
     public Ingredient getIngredientById(int id) {
         try(Session session = sessionFactory.openSession()) {
             return session.get(Ingredient.class, id);
-        }
+        } // Session is auto-closed
     }
 }
