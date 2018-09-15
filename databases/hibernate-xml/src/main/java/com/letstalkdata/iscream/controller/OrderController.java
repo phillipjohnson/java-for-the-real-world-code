@@ -1,6 +1,5 @@
 package com.letstalkdata.iscream.controller;
 
-import com.letstalkdata.iscream.domain.Ingredient;
 import com.letstalkdata.iscream.domain.Order;
 import com.letstalkdata.iscream.service.IngredientService;
 import com.letstalkdata.iscream.service.OrderService;
@@ -11,10 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
@@ -44,16 +41,16 @@ public class OrderController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String createOrder(@ModelAttribute NewOrderRequest newOrderRequest,
                               Model model) {
-        Ingredient flavor
+        var flavor
                 = ingredientService.getIngredientById(newOrderRequest.flavor);
-        List<Ingredient> ingredients = Arrays.stream(newOrderRequest.toppings)
+        var ingredients = Arrays.stream(newOrderRequest.toppings)
                 .mapToObj(id -> ingredientService.getIngredientById(id))
                 .collect(Collectors.toList());
         ingredients.add(flavor);
-        Order order = new Order(ingredients, newOrderRequest.scoops);
+        var order = new Order(ingredients, newOrderRequest.scoops);
 
-        BigDecimal priceNumber = order.getTotalPrice();
-        String price = NumberFormat.getCurrencyInstance(Locale.US)
+        var priceNumber = order.getTotalPrice();
+        var price = NumberFormat.getCurrencyInstance(Locale.US)
                 .format(priceNumber);
         model.addAttribute("price", price);
 

@@ -24,7 +24,7 @@ public class OrderService {
 
     @Transactional
     public void save(Order order) {
-        int orderId = saveOrder(order);
+        var orderId = saveOrder(order);
         saveLineItem(orderId, order.getFlavor(), order.getScoops());
         order.getToppings()
                 .forEach(topping -> saveLineItem(orderId, topping, 1));
@@ -34,10 +34,10 @@ public class OrderService {
             "insert into purchase(total_price) values (?)";
 
     private int saveOrder(Order order) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+        var keyHolder = new GeneratedKeyHolder();
 
         PreparedStatementCreator psc = con -> {
-            PreparedStatement ps = con.prepareStatement(CREATE_ORDER,
+            var ps = con.prepareStatement(CREATE_ORDER,
                     PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setBigDecimal(1, order.getTotalPrice());
             return ps;

@@ -1,6 +1,5 @@
 package com.letstalkdata.iscream;
 
-import com.letstalkdata.iscream.domain.Ingredient;
 import com.letstalkdata.iscream.domain.Order;
 import com.letstalkdata.iscream.service.IngredientService;
 import com.letstalkdata.iscream.service.OrderService;
@@ -29,20 +28,20 @@ public class OrderMaker {
     }
 
     public void makeRandomOrder() {
-        List<Ingredient> flavors = ingredientService.getFlavors();
-        List<Ingredient> toppings = ingredientService.getToppings();
-        Ingredient myFlavor = getRandom(flavors, 1).get(0);
-        List<Ingredient> myToppings = getRandom(toppings, 3);
+        var flavors = ingredientService.getFlavors();
+        var toppings = ingredientService.getToppings();
+        var myFlavor = getRandom(flavors, 1).get(0);
+        var myToppings = getRandom(toppings, 3);
         myToppings.add(myFlavor);
 
-        Order order = new Order(toppings, 1);
+        var order = new Order(toppings, 1);
         orderService.save(order);
         log.info("Saved Order ID {}!", order.getId());
     }
 
     public void makeBadOrder() {
         try {
-            Order order = new Order();
+            var order = new Order();
             orderService.save(order); // This line intentionally errors
         } catch (PersistenceException e) {
             log.error("Error saving order!", e);

@@ -4,8 +4,6 @@ import com.letstalkdata.iscream.service.DailySpecialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class DailySpecialPrinter {
 
@@ -17,7 +15,7 @@ public class DailySpecialPrinter {
     }
 
     public void printSpecials() {
-        List<String> dailySpecials = dailySpecialService.getSpecials();
+        var dailySpecials = dailySpecialService.getSpecials();
 
         System.out.println("Today's specials are:");
         dailySpecials.forEach(s -> System.out.println(" - " + s));

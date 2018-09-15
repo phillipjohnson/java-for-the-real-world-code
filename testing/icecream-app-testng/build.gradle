@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
     }
 }
 
@@ -12,8 +12,8 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -30,6 +30,6 @@ test {
 shadowJar {
     baseName = 'iscream'
     manifest {
-        attributes 'Main-Class': 'com.example.iscream.Application'
+        attributes 'Main-Class': 'com.letstalkdata.iscream.Application'
     }
 }

@@ -4,9 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -20,7 +18,7 @@ public class DailySpecialServiceTest {
             "src/test/resources/json-samples";
 
     private String readJsonFromFile(String fileName) throws Exception {
-        Path jsonPath = Paths.get(TEST_JSON_ROOT, fileName);
+        var jsonPath = Paths.get(TEST_JSON_ROOT, fileName);
         return new String(Files.readAllBytes(jsonPath));
     }
 
@@ -35,17 +33,17 @@ public class DailySpecialServiceTest {
 
     @Test(dataProvider = "counts")
     public void verifyCounts(String fileName, int expected) throws Exception {
-        String json = readJsonFromFile(fileName + ".json");
-        DailySpecialService service = new DailySpecialService();
-        List<String> parsedFlavors = service.parseFlavorsFromJson(json);
+        var json = readJsonFromFile(fileName + ".json");
+        var service = new DailySpecialService();
+        var parsedFlavors = service.parseFlavorsFromJson(json);
         assertEquals(parsedFlavors.size(), expected);
     }
 
     @Test
     public void GivenOneSpecial_FlavorNameIsExtracted() throws Exception {
-        String json = readJsonFromFile("one_special.json");
-        DailySpecialService service = new DailySpecialService();
-        List<String> parsedFlavors = service.parseFlavorsFromJson(json);
+        var json = readJsonFromFile("one_special.json");
+        var service = new DailySpecialService();
+        var parsedFlavors = service.parseFlavorsFromJson(json);
         assertEquals(parsedFlavors.get(0), "Salty Caramel");
     }
 }

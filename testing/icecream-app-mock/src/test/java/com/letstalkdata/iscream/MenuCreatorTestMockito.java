@@ -6,13 +6,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.fail;
 
 /**
  * Author: Phillip Johnson
@@ -23,21 +18,20 @@ public class MenuCreatorTestMockito {
     @Test
     public void WhenAMenuIsCreated_ThenDailySpecialServiceIsCalled() {
         // Step 1: Create the mock object
-        DailySpecialService mockService =
-                Mockito.mock(DailySpecialService.class);
+        var mockService = Mockito.mock(DailySpecialService.class);
 
         // Step 2: Set the expectations
-        List<String> specials = new ArrayList<>();
+        var specials = new ArrayList<String>();
         Mockito.when(mockService.getSpecials()).thenReturn(specials);
 
         // Step 3: Inject the mock
-        MenuCreator menuCreator = new MenuCreator(mockService);
+        var menuCreator = new MenuCreator(mockService);
 
         // Step 4: Invoke the test object
         menuCreator.getTodaysMenu();
 
         // Step 5: Verify
-        Mockito.verify(mockService, Mockito.times(1));
+        Mockito.verify(mockService, Mockito.times(1)).getSpecials();
     }
 
     @Mock
@@ -46,7 +40,7 @@ public class MenuCreatorTestMockito {
     @Test
     public void menuCreatorCanBeReused() {
         MockitoAnnotations.initMocks(this);
-        MenuCreator menuCreator = new MenuCreator(mockDailySpecialService);
+        var menuCreator = new MenuCreator(mockDailySpecialService);
 
         try {
             menuCreator.getTodaysMenu();

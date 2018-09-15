@@ -43,16 +43,16 @@ public class OrderController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String createOrder(@ModelAttribute NewOrderRequest newOrderRequest,
                               Model model) {
-        Ingredient flavor
+        var flavor
                 = ingredientService.getIngredientById(newOrderRequest.flavor);
-        List<Ingredient> ingredients = Arrays.stream(newOrderRequest.toppings)
+        var ingredients = Arrays.stream(newOrderRequest.toppings)
                 .mapToObj(id -> ingredientService.getIngredientById(id))
                 .collect(Collectors.toList());
         ingredients.add(flavor);
-        Order order = new Order(ingredients, newOrderRequest.scoops);
+        var order = new Order(ingredients, newOrderRequest.scoops);
 
-        BigDecimal priceNumber = order.getTotalPrice();
-        String price = NumberFormat.getCurrencyInstance(Locale.US)
+        var priceNumber = order.getTotalPrice();
+        var price = NumberFormat.getCurrencyInstance(Locale.US)
                 .format(priceNumber);
         model.addAttribute("price", price);
 
@@ -68,7 +68,7 @@ public class OrderController {
     @ResponseBody
     public String createOrderFromJson(@RequestBody String orderJson)
             throws Exception {
-        Order order = MAPPER.readValue(orderJson, Order.class);
+        var order = MAPPER.readValue(orderJson, Order.class);
         order.getOrderLineItems().forEach(li -> li.setOrder(order));
         orderService.save(order);
 
@@ -79,7 +79,7 @@ public class OrderController {
             produces = "application/json")
     @ResponseBody
     public String all() throws Exception {
-        List<Order> orders = orderService.getAllOrders();
+        var orders = orderService.getAllOrders();
         return MAPPER
                 .writerWithDefaultPrettyPrinter()
                 .writeValueAsString(orders);

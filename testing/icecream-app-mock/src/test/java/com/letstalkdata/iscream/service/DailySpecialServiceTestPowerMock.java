@@ -27,7 +27,7 @@ public class DailySpecialServiceTestPowerMock {
                 .andReturn(true);
         PowerMock.replay(DailySpecialService.class);
 
-        boolean available = DailySpecialService.isServiceAvailable();
+        var available = DailySpecialService.isServiceAvailable();
         assertTrue(available);
     }
 
@@ -36,7 +36,7 @@ public class DailySpecialServiceTestPowerMock {
         PowerMockito.mockStatic(DailySpecialService.class);
         Mockito.when(DailySpecialService.isServiceAvailable()).thenReturn(true);
 
-        boolean available = DailySpecialService.isServiceAvailable();
+        var available = DailySpecialService.isServiceAvailable();
         assertTrue(available);
     }
 }

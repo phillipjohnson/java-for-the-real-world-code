@@ -3,7 +3,6 @@ package com.letstalkdata.iscream.controller;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.letstalkdata.iscream.domain.Flavor;
 import com.letstalkdata.iscream.domain.Order;
 import com.letstalkdata.iscream.domain.Topping;
 import com.letstalkdata.iscream.service.IngredientService;
@@ -13,10 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -45,14 +42,14 @@ public class OrderController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String createOrder(@ModelAttribute NewOrderRequest newOrderRequest,
                               Model model) {
-        Flavor flavor = ingredientService.getFlavorById(newOrderRequest.flavor);
-        Topping[] toppings = Arrays.stream(newOrderRequest.toppings)
+        var flavor = ingredientService.getFlavorById(newOrderRequest.flavor);
+        var toppings = Arrays.stream(newOrderRequest.toppings)
                 .mapToObj(id -> ingredientService.getToppingById(id))
                 .toArray(Topping[]::new);
-        Order order = new Order(flavor, newOrderRequest.scoops, toppings);
+        var order = new Order(flavor, newOrderRequest.scoops, toppings);
 
-        BigDecimal priceNumber = order.getTotalPrice();
-        String price = NumberFormat.getCurrencyInstance(Locale.US)
+        var priceNumber = order.getTotalPrice();
+        var price = NumberFormat.getCurrencyInstance(Locale.US)
                 .format(priceNumber);
         model.addAttribute("price", price);
 
@@ -70,7 +67,7 @@ public class OrderController {
             produces = "application/json")
     @ResponseBody
     public String createOrderFromJson(@RequestBody String orderJson) {
-        Order order = GSON.fromJson(orderJson, Order.class);
+        var order = GSON.fromJson(orderJson, Order.class);
         orderService.save(order);
 
         return GSON.toJson(order);
@@ -80,7 +77,7 @@ public class OrderController {
             produces = "application/json")
     @ResponseBody
     public String all() {
-        List<Order> orders = orderService.getAllOrders();
+        var orders = orderService.getAllOrders();
         return GSON.toJson(orders);
     }
 

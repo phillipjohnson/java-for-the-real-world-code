@@ -43,14 +43,14 @@ public class OrderController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String createOrder(@ModelAttribute NewOrderRequest newOrderRequest,
                               Model model) {
-        Flavor flavor = ingredientService.getFlavorById(newOrderRequest.flavor);
-        Topping[] toppings = Arrays.stream(newOrderRequest.toppings)
+        var flavor = ingredientService.getFlavorById(newOrderRequest.flavor);
+        var toppings = Arrays.stream(newOrderRequest.toppings)
                 .mapToObj(id -> ingredientService.getToppingById(id))
                 .toArray(Topping[]::new);
-        Order order = new Order(flavor, newOrderRequest.scoops, toppings);
+        var order = new Order(flavor, newOrderRequest.scoops, toppings);
 
-        BigDecimal priceNumber = order.getTotalPrice();
-        String price = NumberFormat.getCurrencyInstance(Locale.US)
+        var priceNumber = order.getTotalPrice();
+        var price = NumberFormat.getCurrencyInstance(Locale.US)
                 .format(priceNumber);
         model.addAttribute("price", price);
 

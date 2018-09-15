@@ -3,7 +3,7 @@ package com.letstalkdata;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -12,7 +12,7 @@ public class Cache {
 
     @Test
     public void cache() throws Exception {
-        final AtomicInteger cacheHits = new AtomicInteger();
+        final var cacheHits = new AtomicInteger();
         LoadingCache<String, String> values = CacheBuilder.newBuilder()
                 .maximumSize(10)
                 .expireAfterAccess(1, TimeUnit.HOURS)

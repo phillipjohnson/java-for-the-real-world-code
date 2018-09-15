@@ -3,7 +3,7 @@ package com.letstalkdata;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.CanReadFileFilter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -13,16 +13,16 @@ public class InputOutputUtils {
 
     @Test
     public void streams() throws Exception {
-        final String DROM = "src/test/resources/declaration.txt";
-        File declaration = Paths.get(DROM).toFile();
-        InputStream is = new FileInputStream(declaration);
+        final var DROM = "src/test/resources/declaration.txt";
+        var declaration = Paths.get(DROM).toFile();
+        var is = new FileInputStream(declaration);
 
-        char[] read = IOUtils.toCharArray(is, Charset.defaultCharset());
+        var read = IOUtils.toCharArray(is, Charset.defaultCharset());
         is.close();
 
         assert new String(read).startsWith("The representatives");
 
-        StringWriter sw = new StringWriter();
+        var sw = new StringWriter();
         is = new FileInputStream(declaration);
         IOUtils.copy(is, sw, Charset.defaultCharset());
         is.close();
@@ -32,9 +32,9 @@ public class InputOutputUtils {
 
     @Test
     public void fileUtils() throws Exception {
-        final String DROM = "src/test/resources/declaration.txt";
-        File declaration = Paths.get(DROM).toFile();
-        String s = FileUtils.readFileToString(declaration,
+        final var DROM = "src/test/resources/declaration.txt";
+        var declaration = Paths.get(DROM).toFile();
+        var s = FileUtils.readFileToString(declaration,
                 Charset.defaultCharset());
 
         assert s.startsWith("The representatives");

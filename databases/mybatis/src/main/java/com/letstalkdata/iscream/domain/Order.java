@@ -23,9 +23,9 @@ public class Order {
     }
 
     private BigDecimal calculatePrice() {
-        BigDecimal iceCreamCost = flavor.getUnitPrice()
+        var iceCreamCost = flavor.getUnitPrice()
                 .multiply(BigDecimal.valueOf(scoops));
-        BigDecimal toppingCost = toppings.stream()
+        var toppingCost = toppings.stream()
                 .map(Topping::getUnitPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         return iceCreamCost.add(toppingCost);

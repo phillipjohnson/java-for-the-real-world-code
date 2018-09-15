@@ -28,8 +28,8 @@ public class OrderController {
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String createOrder(@ModelAttribute Order order, Model model) {
-        double priceNumber = order.getPrice();
-        String price = NumberFormat.getCurrencyInstance(Locale.US)
+        var priceNumber = order.getPrice();
+        var price = NumberFormat.getCurrencyInstance(Locale.US)
                 .format(priceNumber);
         model.addAttribute("price", price);
         return "order-success";

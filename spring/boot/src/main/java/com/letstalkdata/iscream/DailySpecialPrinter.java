@@ -19,7 +19,7 @@ public class DailySpecialPrinter implements CommandLineRunner {
 
     @Override
     public void run(String... args){
-        List<String> dailySpecials = dailySpecialService.getSpecials();
+        var dailySpecials = dailySpecialService.getSpecials();
 
         System.out.println("Today's specials are:");
         dailySpecials.forEach(s -> System.out.println(" - " + s));

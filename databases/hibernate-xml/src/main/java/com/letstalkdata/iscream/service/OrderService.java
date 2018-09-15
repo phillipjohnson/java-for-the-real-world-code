@@ -1,9 +1,7 @@
 package com.letstalkdata.iscream.service;
 
 import com.letstalkdata.iscream.domain.Order;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +16,8 @@ public class OrderService {
     }
 
     public void save(Order order) {
-        try(Session session = sessionFactory.openSession()) {
-            Transaction tx = session.beginTransaction();
+        try(var session = sessionFactory.openSession()) {
+            var tx = session.beginTransaction();
             session.persist(order);
             tx.commit();
         } // Session is auto-closed

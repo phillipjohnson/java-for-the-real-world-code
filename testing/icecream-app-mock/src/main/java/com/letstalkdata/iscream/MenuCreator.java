@@ -2,8 +2,6 @@ package com.letstalkdata.iscream;
 
 import com.letstalkdata.iscream.service.DailySpecialService;
 
-import java.util.List;
-
 public class MenuCreator {
 
     private DailySpecialService dailySpecialService;
@@ -13,9 +11,9 @@ public class MenuCreator {
     }
 
     public String getTodaysMenu() {
-        List<String> dailySpecials = dailySpecialService.getSpecials();
+        var dailySpecials = dailySpecialService.getSpecials();
 
-        StringBuilder menuBuilder = new StringBuilder("Today's specials are:\n");
+        var menuBuilder = new StringBuilder("Today's specials are:\n");
         dailySpecials.forEach(s ->
                 menuBuilder.append(" - ").append(s).append("\n"));
 

@@ -41,7 +41,7 @@ public class OrderScreen extends VerticalLayout {
             submit = new Button("Submit");
             submit.setStyleName(ValoTheme.BUTTON_PRIMARY);
             submit.addClickListener(click -> {
-                Order order = new Order(
+                var order = new Order(
                         flavor.getValue().toString(),
                         Integer.parseInt(scoops.getValue()),
                         toppings.getValue().toArray(new Topping[]{}));
@@ -67,8 +67,8 @@ public class OrderScreen extends VerticalLayout {
 
         void showDetails(Order order) {
             setVisible(true);
-            double priceNumber = order.getPrice();
-            String price = NumberFormat.getCurrencyInstance(Locale.US)
+            var priceNumber = order.getPrice();
+            var price = NumberFormat.getCurrencyInstance(Locale.US)
                     .format(priceNumber);
             orderDetails.setValue("Order Saved! Total: " + price);
         }

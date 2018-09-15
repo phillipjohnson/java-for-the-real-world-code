@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -21,14 +20,14 @@ public class IngredientService {
     }
 
     private RowMapper<Flavor> flavorRowMapper = (rs, rowNum) -> {
-        Integer id = rs.getInt("id");
-        String name = rs.getString("ingredient");
-        BigDecimal unitPrice = rs.getBigDecimal("unit_price");
+        var id = rs.getInt("id");
+        var name = rs.getString("ingredient");
+        var unitPrice = rs.getBigDecimal("unit_price");
         return new Flavor(id, name, unitPrice);
     };
 
     public List<Flavor> getFlavors() {
-        String sql = "select id, ingredient, unit_price from ingredient " +
+        var sql = "select id, ingredient, unit_price from ingredient " +
                 "where ingredient_type = 'ICE_CREAM'";
         return jdbcTemplate.query(sql, flavorRowMapper);
     }
@@ -42,14 +41,14 @@ public class IngredientService {
     }
 
     private RowMapper<Topping> toppingRowMapper = (rs, rowNum) -> {
-        Integer id = rs.getInt("id");
-        String name = rs.getString("ingredient");
-        BigDecimal unitPrice = rs.getBigDecimal("unit_price");
+        var id = rs.getInt("id");
+        var name = rs.getString("ingredient");
+        var unitPrice = rs.getBigDecimal("unit_price");
         return new Topping(id, name, unitPrice);
     };
 
     public List<Topping> getToppings() {
-        String sql = "select id, ingredient, unit_price from ingredient " +
+        var sql = "select id, ingredient, unit_price from ingredient " +
                 "where ingredient_type = 'TOPPING'";
         return jdbcTemplate.query(sql, toppingRowMapper);
     }

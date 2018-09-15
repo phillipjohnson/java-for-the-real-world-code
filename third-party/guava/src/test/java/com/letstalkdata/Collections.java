@@ -1,17 +1,16 @@
 package com.letstalkdata;
 
 import com.google.common.collect.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
 
 public class Collections {
 
     @Test
     public void immutables() {
+        // Java 9+ should probably use standard library List.of() and Set.of()
         List<String> myList = ImmutableList.of("blue", "green", "yellow");
         Set<String> mySet = ImmutableSet.of("blue", "green", "yellow");
     }

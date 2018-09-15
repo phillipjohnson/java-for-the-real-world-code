@@ -1,6 +1,5 @@
 package com.letstalkdata.iscream;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.
         AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,12 +8,11 @@ import org.springframework.context.annotation.ComponentScan;
 public class Application {
 
     public static void main(String[] args) {
-        ApplicationContext ctx =
-                new AnnotationConfigApplicationContext(
+        var ctx = new AnnotationConfigApplicationContext(
                         Application.class,
                         ApplicationConfig.class);
 
-        OrderMaker maker = ctx.getBean(OrderMaker.class);
+        var maker = ctx.getBean(OrderMaker.class);
 
         maker.makeRandomOrder();
         maker.makeBadOrder();

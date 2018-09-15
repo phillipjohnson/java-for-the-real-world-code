@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class IngredientsService {
 
     public List<String> getFlavors() {
-        List<String> flavors = new ArrayList<>();
+        var flavors = new ArrayList<String>();
         flavors.add("");
         flavors.addAll(EnumSet.allOf(Flavor.class).stream()
                     .map(Flavor::toString)

@@ -35,10 +35,9 @@ public class OrderService {
     }
 
     private void saveLineItem(int orderId, Ingredient ingredient, int units) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("purchaseId", orderId);
-        params.put("ingredientId", ingredient.getId());
-        params.put("units", units);
+        var params = Map.of("purchaseId", orderId,
+                "ingredientId", ingredient.getId(),
+                "units", units);
         sqlSession.insert("createPurchaseLineItem", params);
     }
 

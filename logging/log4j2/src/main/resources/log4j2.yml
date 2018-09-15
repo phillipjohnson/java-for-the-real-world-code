@@ -30,9 +30,8 @@ Configuration:
     Root:
       level: error
       AppenderRef:
-        -
-          ref: STDOUT
-          ref: File
+        - ref: STDOUT
+        - ref: File
 
     logger:
       -

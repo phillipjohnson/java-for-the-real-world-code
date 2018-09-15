@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +27,7 @@ public class OrderService {
 
     @Transactional
     public void save(Order order) {
-        int orderId = saveOrder(order);
+        var orderId = saveOrder(order);
         saveLineItem(orderId, order.getFlavor(), order.getScoops());
         order.getToppings()
                 .forEach(topping -> saveLineItem(orderId, topping, 1));
@@ -38,10 +37,10 @@ public class OrderService {
             "insert into purchase(total_price) values (?)";
 
     private int saveOrder(Order order) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+        var keyHolder = new GeneratedKeyHolder();
 
         PreparedStatementCreator psc = con -> {
-            PreparedStatement ps = con.prepareStatement(CREATE_ORDER,
+            var ps = con.prepareStatement(CREATE_ORDER,
                     PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setBigDecimal(1, order.getTotalPrice());
             return ps;
@@ -80,7 +79,7 @@ public class OrderService {
                     "and p.id = ?";
 
     public List<Order> getAllOrders() {
-        List<Order> orders = jdbcTemplate.query(GET_ALL_ORDERS, orderRowMapper);
+        var orders = jdbcTemplate.query(GET_ALL_ORDERS, orderRowMapper);
         orders.forEach(order -> order.setToppings(getToppingsForOrder(order)));
         return orders;
     }
@@ -92,10 +91,10 @@ public class OrderService {
     }
 
     private RowMapper<Order> orderRowMapper = (rs, rowNum) -> {
-        Order order = new Order();
+        var order = new Order();
         order.setId(rs.getInt("id"));
         order.setScoops(rs.getInt("scoops"));
-        Flavor flavor = new Flavor(
+        var flavor = new Flavor(
                 rs.getInt("flavor_id"),
                 rs.getString("flavor"),
                 rs.getBigDecimal("unit_price"));

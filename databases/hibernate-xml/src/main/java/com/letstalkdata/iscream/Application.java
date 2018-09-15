@@ -9,6 +9,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.io.IOException;
 
@@ -22,7 +24,7 @@ public class Application {
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource)
             throws IOException{
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        var sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setMappingLocations(loadResources());
 
@@ -35,5 +37,16 @@ public class Application {
     private Resource[] loadResources() throws IOException {
         return ResourcePatternUtils.getResourcePatternResolver(resourceLoader)
                     .getResources("classpath*:*.hbm.xml");
+    }
+
+    // These are required in Spring Boot 2,
+    // although we will not explicitly use them
+
+    @Autowired
+    EntityManagerFactory entityManagerFactory;
+
+    @Bean
+    public EntityManager getEntityManager() {
+        return entityManagerFactory.createEntityManager();
     }
 }
