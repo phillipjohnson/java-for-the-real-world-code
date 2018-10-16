@@ -12,15 +12,15 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 group = 'com.letstalkdata'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile group: 'org.springframework', name: 'spring-context', version: '4.3.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.0.8.RELEASE'
 }
 
 shadowJar {
